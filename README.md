@@ -7,6 +7,9 @@
 
 - Turn on synchronize database
   - RESTful API Express Js/src/config/db.ts set synchronize to true
+  - cd RESTful API Express Js
+  - yarn dev
+  - after synchronize done you can run as production
 
 
 ### Database Schema
