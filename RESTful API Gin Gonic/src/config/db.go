@@ -7,7 +7,7 @@ import (
 )
 
 func DB() *gorm.DB {
-	host := "20.2.128.203"
+	host := "localhost"
 	port := "5432"
 	user := "akmaldira"
 	password := "Akmaldira123"
