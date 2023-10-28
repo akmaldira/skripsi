@@ -1,27 +1,26 @@
 import { Request, Response } from "express";
-import { AppDataSource } from "../config/db";
-import Employee from "../entities/employee";
-import EmployeeRepository from "../repositories/employeeRepositories";
+import { Pool } from "pg";
+const ormconfig = require("../../ormconfig");
 
 class EmployeeController {
-  private repository: EmployeeRepository;
+  private client: Pool;
   constructor() {
-    this.repository = new EmployeeRepository(
-      Employee,
-      AppDataSource.manager,
-      AppDataSource.manager.queryRunner
-    );
+    this.client =  new Pool({
+      host: ormconfig.host,
+      port: ormconfig.port,
+      user: ormconfig.username,
+      password: ormconfig.password,
+      database: ormconfig.database,
+    })
+    this.client.connect();
   }
 
   public getEmployee = async (req: Request, res: Response): Promise<void> => {
     const { row } = req.query;
 
-    const employees = await this.repository.find({
-      take: Number(row),
-      order: { employee_id: "ASC" },
-    });
+    const employees = await this.client.query(`SELECT * FROM employee LIMIT ${row}`)
 
-    res.status(200).send(employees);
+    res.status(200).send(employees.rows);
   };
 
   public getEmployeeHalf = async (
@@ -29,20 +28,9 @@ class EmployeeController {
     res: Response
   ): Promise<void> => {
     const { row } = req.query;
-    const employees = await this.repository.find({
-      select: [
-        "employee_id",
-        "first_name",
-        "last_name",
-        "email",
-        "gender",
-        "date_of_birth",
-      ],
-      take: Number(row),
-      order: { employee_id: "ASC" },
-    });
+    const employees = await this.client.query(`SELECT employee_id, first_name, last_name, email, gender, date_of_birth FROM employee LIMIT ${row}`);
 
-    res.status(200).send(employees);
+    res.status(200).send(employees.rows);
   };
 }
 
