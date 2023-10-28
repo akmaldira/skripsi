@@ -1,16 +1,29 @@
 ### Local Installataion
 
-- Change all config on
-  - RESTful API Express Js/src/config/db.ts
-  - RESTful API Gin Gonic/src/config/db.go
+- Import Database data to your database
+  - Go to DBeaver application (if you dont have DBeaver, you can download <a href="https://dbeaver.io/">here</a>)
+  - Connect to your postgres database
+  - Right click on database name
+  - Tools -> Restore
+  - Choose /dump-kuliah-202310272148.sql file
+
+- Change database environment variable on
+  - RESTful API Express Js/.env.development
+  - RESTful API Gin Gonic/.env.development
   - RESTful API Spring Boot/src/main/resources/application.properties
 
-- Turn on synchronize database
-  - RESTful API Express Js/src/config/db.ts set synchronize to true
-  - cd RESTful API Express Js
-  - yarn dev
-  - after synchronize done you can run as production
-
-
-### Database Schema
-![alt text](database-schema.jpg)
+- Run Program as development
+  - Express Js
+    ```
+    yarn install
+    yarn dev
+    ``` 
+  - Gin Gonic
+    ```
+    go run main.go
+    ``` 
+  - Spring Boot
+    ```
+    ./gradlew build -x test
+    java -jar /build/libs/rest-api-0.0.1-SNAPSHOT.jar
+    ``` 

@@ -1,17 +1,4 @@
-import { DataSource } from "typeorm";
+import { DataSource, DataSourceOptions } from "typeorm";
+const ormconfig = require("../../ormconfig");
 
-export const AppDataSource = new DataSource({
-  type: "postgres",
-  host: "localhost",
-  port: 5432,
-  username: "akmaldira",
-  password: "Akmaldira123",
-  database: "kuliah",
-  synchronize: false,
-  logging: false,
-  entities: [
-    process.env.NODE_ENV === "production"
-      ? "./dist/entities/*.js"
-      : "./src/entities/*.ts",
-  ],
-});
+export const AppDataSource = new DataSource(ormconfig as DataSourceOptions);

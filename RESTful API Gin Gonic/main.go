@@ -5,8 +5,11 @@ import (
 	"gin-gonic/src/controllers"
 	"gin-gonic/src/repositories"
 	"gin-gonic/src/services"
+	"log"
+	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 var (
@@ -14,6 +17,19 @@ var (
 )
 
 func main() {
+	if os.Getenv("GIN_MODE") == "release" {
+		err := godotenv.Load(".env")
+
+		if err != nil {
+			log.Fatal(err)
+		}
+	} else {
+		err := godotenv.Load(".env.development")
+
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 	router := gin.Default()
 
 	db := config.DB()
