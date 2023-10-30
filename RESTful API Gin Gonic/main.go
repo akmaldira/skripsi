@@ -7,6 +7,7 @@ import (
 	"gin-gonic/src/services"
 	"log"
 	"os"
+	"runtime"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -17,6 +18,7 @@ var (
 )
 
 func main() {
+	runtime.GOMAXPROCS(2)
 	if os.Getenv("GIN_MODE") == "release" {
 		err := godotenv.Load(".env")
 
