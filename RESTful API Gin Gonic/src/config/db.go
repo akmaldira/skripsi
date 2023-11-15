@@ -20,6 +20,13 @@ func DB() *gorm.DB {
 		Logger: logger.Default.LogMode(logger.Silent),
 	})
 
+	sqlDb, err := db.DB()
+
+	sqlDb.SetMaxOpenConns(10)
+	sqlDb.SetMaxIdleConns(10)
+	sqlDb.SetConnMaxIdleTime(600000)
+	sqlDb.SetConnMaxLifetime(600000)
+
 	if err != nil {
 		panic(err)
 	}

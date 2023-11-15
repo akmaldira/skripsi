@@ -1,13 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"gin-gonic/src/config"
 	"gin-gonic/src/controllers"
 	"gin-gonic/src/repositories"
 	"gin-gonic/src/services"
 	"log"
 	"os"
-	"runtime"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -18,23 +18,17 @@ var (
 )
 
 func main() {
-	runtime.GOMAXPROCS(2)
-	if os.Getenv("GIN_MODE") == "release" {
-		err := godotenv.Load(".env")
+	err := godotenv.Load(".env")
 
-		if err != nil {
-			log.Fatal(err)
-		}
-	} else {
-		err := godotenv.Load(".env.development")
-
-		if err != nil {
-			log.Fatal(err)
-		}
+	if err != nil {
+		log.Fatal(err)
 	}
+
 	router := gin.Default()
 
 	db := config.DB()
+
+	fmt.Println("Using Database: " + os.Getenv("DB_NAME") + " on " + os.Getenv("DB_HOST") + ":" + os.Getenv("DB_PORT") + " with user: " + os.Getenv("DB_USER"))
 
 	employeeRepository := repositories.NewEmployeeRepository(db)
 	employeeService := services.NewEmployeeService(employeeRepository)
@@ -43,5 +37,5 @@ func main() {
 	router.GET("/employee/all", employeeController.GetEmployee)
 	router.GET("/employee/half", employeeController.GetEmployeeHalf)
 
-	router.Run(":6000")
+	router.Run("0.0.0.0:6000")
 }

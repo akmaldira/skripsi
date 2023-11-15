@@ -1,4 +1,5 @@
 import cors from "cors";
+import dotenv from "dotenv";
 import express, { Application } from "express";
 import { AppDataSource } from "./config/db";
 
@@ -9,7 +10,7 @@ class App {
   constructor(routes: any[]) {
     this.app = express();
     this.port = 5000;
-
+    dotenv.config();
     console.log("App initializing...");
     this.connectToDatabase();
     this.initializeMiddlewares();
@@ -24,7 +25,11 @@ class App {
 
   private connectToDatabase(): void {
     AppDataSource.initialize()
-      .then(() => console.log("Database connected"))
+      .then((res) =>
+        console.log(
+          `Using Database: ${process.env.DB_NAME} on ${process.env.DB_HOST}:${process.env.DB_PORT} with user: ${process.env.DB_USER}`
+        )
+      )
       .catch((err: any) => console.log("Database error", err));
   }
 

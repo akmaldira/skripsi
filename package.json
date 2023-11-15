@@ -1,0 +1,22 @@
+{
+  "name": "skripsi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/akmaldira/skripsi.git",
+  "author": "akmaldira <akmaldiraa@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "100:50": "node index.js --thread=100 --row=50 --col=all --mode=local",
+    "100:500": "node index.js --thread=100 --row=500 --col=all --mode=local",
+    "100:5000": "node index.js --thread=100 --row=5000 --col=all --mode=local",
+    "500:50": "node index.js --thread=500 --row=50 --col=all --mode=local",
+    "500:500": "node index.js --thread=500 --row=500 --col=all --mode=local",
+    "500:5000": "node index.js --thread=500 --row=5000 --col=all --mode=local",
+    "1000:50": "node index.js --thread=1000 --row=50 --col=all --mode=local",
+    "1000:500": "node index.js --thread=1000 --row=500 --col=all --mode=local",
+    "1000:5000": "node index.js --thread=1000 --row=5000 --col=all --mode=local"
+  },
+  "dependencies": {
+    "child_process": "^1.0.2"
+  }
+}

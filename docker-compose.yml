@@ -1,0 +1,48 @@
+version: "2"
+
+name: load-test
+services:
+  express-js:
+    build: ./RESTful API Express Js/.
+    container_name: express-js
+    ports:
+      - "127.0.0.1:5000:5000"
+    networks:
+      - load-test
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 4096M
+  gin-gonic:
+    build: ./RESTful API Gin Gonic/.
+    container_name: gin-gonic
+    ports:
+      - "127.0.0.1:6000:6000"
+    networks:
+      - load-test
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 4096M
+  spring-boot:
+    build: ./RESTful API Spring Boot/.
+    container_name: spring-boot
+    ports:
+      - "127.0.0.1:7000:7000"
+    networks:
+      - load-test
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 4096M
+
+networks:
+  load-test:
+    name: load-test
+    external: true
