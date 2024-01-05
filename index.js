@@ -51,6 +51,6 @@ const csvPath = `${resultPath}/result.csv`;
 console.log(`Running with ${thread} thread(s) and ${row} row(s)`);
 
 execSync(
-  `cd apache-jmeter-5.5/bin && jmeter -n -t ../../LoadTest.jmx -l ${csvPath} -e -o ${resultPath}`,
+  `cd apache-jmeter-5.6.2/bin && jmeter -n -t ../../LoadTest.jmx -l ${csvPath} -e -o ${resultPath}`,
   { stdio: "inherit" }
 );

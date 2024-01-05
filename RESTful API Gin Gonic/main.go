@@ -24,7 +24,9 @@ func main() {
 		log.Fatal(err)
 	}
 
-	router := gin.Default()
+	gin.SetMode(gin.ReleaseMode)
+
+	router := gin.New()
 
 	db := config.DB()
 

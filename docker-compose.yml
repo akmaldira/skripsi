@@ -6,7 +6,7 @@ services:
     build: ./RESTful API Express Js/.
     container_name: express-js
     ports:
-      - "127.0.0.1:5000:5000"
+      - "0.0.0.0:5000:5000"
     networks:
       - load-test
     restart: always
@@ -19,7 +19,7 @@ services:
     build: ./RESTful API Gin Gonic/.
     container_name: gin-gonic
     ports:
-      - "127.0.0.1:6000:6000"
+      - "0.0.0.0:6000:6000"
     networks:
       - load-test
     restart: always
@@ -32,7 +32,7 @@ services:
     build: ./RESTful API Spring Boot/.
     container_name: spring-boot
     ports:
-      - "127.0.0.1:7000:7000"
+      - "0.0.0.0:7000:7000"
     networks:
       - load-test
     restart: always

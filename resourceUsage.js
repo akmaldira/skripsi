@@ -22,7 +22,7 @@ resourceUsageFiles.forEach((file) => {
   const data = fs.readFileSync(`./Hasil/${file}`, "utf8");
   const thread = file.split("-")[0];
   const rowReq = file.split("-")[1];
-  const col = file.split("-")[2].split(".")[0] == "all" ? "All" : "Half";
+  const col = file.split("-")[2].split(".")[0] == "half" ? "Half" : "All";
   const testCase = `${thread} Thread ${rowReq} Row ${col}`;
 
   const row = data.split("\n");

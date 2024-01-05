@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "build": "tsc --outDir dist",
-    "start": "pm2-runtime start ecosystem.config.js --only express:prod",
+    "start": "node dist/server.js",
+    "start:pm2": "pm2-runtime start ecosystem.config.js --only express:prod",
     "dev": "cross-env NODE_ENV=development ts-node src/server.ts"
   },
   "dependencies": {

@@ -1,5 +1,7 @@
 package com.springboot.restapi.services;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -21,14 +23,20 @@ public class EmployeeService {
     }
 
     public List<Employee> getEmployee(Integer row) {
-
+        Instant now = Instant.now();
         List<Employee> employee = employeeRepository.findAllColumnsLimit(row);
+        Instant now2 = Instant.now();
+        long processingTime = ChronoUnit.MILLIS.between(now, now2);
+        System.out.format("Processing time: %.3f%n", processingTime / 1000.0);
         return employee;
     }
 
     public List<EmployeeHalf> getEmployeeHalf(Integer row) {
-
+        Instant now = Instant.now();
         List<EmployeeHalf> employee = employeeHalfRepository.findHalfColumnLimit(row);
+        Instant now2 = Instant.now();
+        long processingTime = ChronoUnit.MILLIS.between(now, now2);
+        System.out.format("Processing time: %.3f%n", processingTime / 1000.0);
         return employee;
     }
 }

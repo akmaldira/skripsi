@@ -14,7 +14,7 @@ import com.springboot.restapi.services.EmployeeService;
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
-    
+
     private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
@@ -23,11 +23,13 @@ public class EmployeeController {
 
     @GetMapping("/all")
     public List<Employee> getEmployee(@RequestParam(name = "row") Integer row) {
-        return employeeService.getEmployee(row);
+        List<Employee> employee = employeeService.getEmployee(row);
+        return employee;
     }
 
     @GetMapping("/half")
     public List<EmployeeHalf> getEmployeeHalf(@RequestParam(name = "row") Integer row) {
-        return employeeService.getEmployeeHalf(row);
+        List<EmployeeHalf> employee = employeeService.getEmployeeHalf(row);
+        return employee;
     }
 }
